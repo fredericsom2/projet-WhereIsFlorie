@@ -1,0 +1,23 @@
+{% extends 'guest/base.html.twig' %}
+
+{% block metatitle %}
+	WhereIsFlorie | Connexion
+{% endblock metatitle %}
+
+{% block main %}
+
+	<h1>Connexion</h1>
+	<div class="login-form-container">
+        <form method="post" class="login-form">
+            <label for="username">Email</label>
+            <input type="text" id="username" name="_username" required placeholder="Adresse e-mail">
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="_password" required placeholder="Mot de passe">
+
+            <button type="submit">Se connecter</button>
+            <button type="submit">Creer un compte</button>
+        </form>
+    </div>
+	
+{% endblock main %}

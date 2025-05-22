@@ -1,0 +1,42 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    
+    <!-- Bloc 1 : logo + description -->
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="{{ asset('assets/img/logo-arbre.png') }}" alt="Logo Arbre du Voyageur">
+        <span>WhereIsFlorie</span>
+      </div>
+      <p>Explore le monde, partage ton aventure.</p>
+
+      <div class="footer-socials">
+        <h3>Médias</h3>
+        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Bloc 2 : liens -->
+    <nav class="footer-links">
+      <h2>À propos</h2>
+      <a href="{{ path('home') }}">Accueil</a>
+      <a href="#">À propos</a>
+      <a href="{{ path('login') }}">Inscription</a>
+      <a href="#carousel">Mes voyages</a>
+    </nav>
+
+    <!-- Bloc 3 : newsletter -->
+    <div class="footer-newsletter">
+      <h2>Newsletter</h2>
+      <form action="#" method="post">
+        <input type="email" placeholder="Votre email" required>
+        <button type="submit">S'inscrire</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {{ "now"|date("Y") }} WhereIsFlorie. Tous droits réservés.</p>
+  </div>
+</footer>

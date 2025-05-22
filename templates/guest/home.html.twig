@@ -1,0 +1,68 @@
+{% extends 'guest/base.html.twig' %}
+
+{% block metatitle %}
+	WhereIsFlorie | Accueil
+{% endblock metatitle %}
+
+{% block main %}
+
+<section class="image-section" style="background-image: url('{{ asset('assets/img/route.jpg') }}')">
+  <div class="hero-text">
+    <h1>Explore le monde</h1>
+    <h1>et partage ton expérience</h1>
+  </div>
+
+  <a href="#carousel" class="scroll-down-arrow">↓</a>
+	<!-- Effet nuage -->
+  	<div class="cloud-divider">
+		<svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+		<path d="M0,96 C480,0 960,180 1440,96 L1440,150 L0,150 Z" fill="#ffffff"></path>
+		</svg>
+  </div>
+</section>
+
+	
+	
+
+
+    <!-- SECTION 2 : CARROUSEL -->
+    <section class="carousel-section overlay-scroll">
+        <h2 class="carousel-title">Mes dernières destinations</h2> 
+
+        <div class="carousel-wrapper">
+            <button class="carousel-arrow left" onclick="scrollCarousel(-1)">&#10094;</button>
+
+            <div class="carousel-container" id="carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <img src="{{ asset('assets/img/daniel-jensen-tQpypKA92k8-unsplash.jpg') }}" alt="Photo 1">
+                    <img src="{{ asset('assets/img/ian-schneider-jk8rarn6lmw-unsplash.jpg') }}" alt="Photo 2">
+                    <img src="{{ asset('assets/img/jared-rice-k3pYa0CDLl0-unsplash.jpg') }}" alt="Photo 3">
+                    <img src="{{ asset('assets/img/toms-ryfptJi3fAM-unsplash.jpg') }}" alt="Photo 4">
+                    <img src="{{ asset('assets/img/van.jpg') }}" alt="Photo 5">
+                    <img src="{{ asset('assets/img/van.jpg') }}" alt="Photo 6">
+                </div>
+            </div>
+
+            <button class="carousel-arrow right" onclick="scrollCarousel(1)">&#10095;</button>
+        </div>
+    </section>
+
+    <script src="{{ asset('assets/js/carousel.js') }}"></script>
+
+
+	<section class="map-section">
+		<h2 class="map-title">Carte de mes destinations</h2>
+		<div id="map"></div>
+	</section>
+
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="{{ asset('assets/js/map.js') }}"></script>
+
+ 
+
+
+{% endblock main %}
+
+
+
