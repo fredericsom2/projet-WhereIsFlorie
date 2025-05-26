@@ -1,0 +1,72 @@
+{% extends 'guest/base.html.twig' %}
+
+{% block metatitle %}
+    WhereIsFlorie | Mes voyages
+{% endblock %}
+
+{% block main %}
+
+<section class="mytravels-header">
+    <h1 class="page-title">Mes voyages</h1>
+    <p class="page-subtitle">Découvre les endroits que j’ai visités et ce que j’y ai vécu.</p>
+</section>
+
+<section class="travels-gallery">
+    {% for travel in travels %}
+        <article class="travel-card">
+            <img src="#" alt="{{ travel.title }}">
+            <div class="travel-content">
+                <h2>{{ travel.title }}</h2>
+                <p class="travel-date">{{ travel.date|date('d F Y') }}</p>
+                <p class="travel-description">{{ travel.description }}</p>
+            </div>
+        </article>
+   
+</section>
+
+<style>
+    .mytravels-header {
+        text-align: center;
+        padding: 2rem;
+        background-color: #f4f4f4;
+    }
+
+    .travels-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .travel-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .travel-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .travel-content {
+        padding: 1rem;
+    }
+
+    .travel-content h2 {
+        margin: 0 0 0.5rem;
+    }
+
+    .travel-date {
+        font-size: 0.9rem;
+        color: gray;
+    }
+
+    .travel-description {
+        margin-top: 1rem;
+    }
+</style>
+
+{% endblock %}
