@@ -3,14 +3,16 @@
   <div class="navbar" id="mainNavbar">
     <div class="logo">
       <img src="{{ asset('assets/img/logo-arbre.png') }}" alt="Logo Arbre du Voyageur">
-      <span>WhereIsFlorie</span>
+       <a href="{{ path('home') }}" class="site-title"><span>WhereIsFlorie</span></a>
     </div>
 
     <div class="menu">
       <a href="{{ path('home') }}">Accueil</a>
-      <a href="#">Voyage</a>
+      <a href="#">Mes voyages</a>
       <a href="{{ path('apropos') }}">Qui suis-je</a>
-      <a href="{{ path('login') }}">Inscription</a>
+      <a href="{{ path('register') }}">Inscription</a>
+      <a href="{{ path('login') }}">Connexion</a>
+     
     </div>
   </div>
 </header>

@@ -5,17 +5,23 @@ namespace App\Controller\profil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
-class ProfilPageController extends AbstractController {
+class ProfilPageController extends AbstractController
+{
+    #[Route('/profil/home', name: "profil_home")]
+    public function displayHome(Security $security): Response
+    {
+        $user = $security->getUser();
 
-	#[Route('/profil/home', name: "profilhome")]
-	public function displayHome() {
-		return $this->render('profil/home.html.twig');
-	}
+        return $this->render('profil/home.html.twig', [
+            'email' => $user ? $user->getUserIdentifier() : 'invité',
+        ]);
+    }
 
-	#[Route('/404', name: '404')]
-	public function display404()
-	{
-		return $this->render('guest/404.html.twig');
-	}
+    #[Route('/404', name: '404')]
+    public function display404(): Response
+    {
+        return $this->render('guest/404.html.twig');
+    }
 }

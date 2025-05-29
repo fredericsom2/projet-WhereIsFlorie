@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+<h1>Liste des utilisateurs</h1>
+
+{% for message in app.flashes('success') %}
+  <div class="flash-success">{{ message }}</div>
+{% endfor %}
+{% for message in app.flashes('error') %}
+  <div class="flash-error">{{ message }}</div>
+{% endfor %}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <form method="POST" action="{{ path('admin_user_delete', { id: user.id }) }}" onsubmit="return confirm('Supprimer cet utilisateur ?');">
+            <button type="submit">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
