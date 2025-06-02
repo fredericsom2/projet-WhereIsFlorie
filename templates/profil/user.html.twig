@@ -1,0 +1,34 @@
+{% extends 'guest/base.html.twig' %}
+
+{% block main %}
+<div class="user-wrapper">
+  <div class="user-content">
+    <h1>Bienvenue {{ user.email }}</h1>
+
+    <div class="user-actions">
+      <a href="{{ path('profil_home') }}" class="btn">Créer une nouvelle expérience</a>
+      <a href="{{ path('logout') }}" class="btn btn-outline">Se déconnecter</a>
+    </div>
+
+    <h2>Vos expériences</h2>
+
+    {% if experiences is not empty %}
+      {% for experience in experiences %}
+        <div class="experience-card">
+          <h3>{{ experience.title }}</h3>
+          <p>{{ experience.description }}</p>
+
+          {% if experience.image %}
+            <img src="{{ asset('uploads/' ~ experience.image) }}" alt="photo" style="max-width: 300px;">
+          {% endif %}
+
+          <p>Profil public ? {{ experience.isPublished ? 'Oui' : 'Non' }}</p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>Vous n'avez pas encore créé d'expérience.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

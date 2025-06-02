@@ -1,37 +1,54 @@
-{% extends 'base.html.twig' %}
+{% extends 'guest/base.html.twig' %}
 
 {% block title %}Gestion des utilisateurs{% endblock %}
 
 {% block body %}
 <h1>Liste des utilisateurs</h1>
 
+{# ✅ Affichage des messages flashs #}
 {% for message in app.flashes('success') %}
-  <div class="flash-success">{{ message }}</div>
+    <div class="flash-success">{{ message }}</div>
 {% endfor %}
-{% for message in app.flashes('error') %}
-  <div class="flash-error">{{ message }}</div>
+
+{% for message in app.flashes('info') %}
+    <div class="flash-info">{{ message }}</div>
 {% endfor %}
 
 <table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Email</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Rôles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for user in users %}
-      <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-          <form method="POST" action="{{ path('admin_user_delete', { id: user.id }) }}" onsubmit="return confirm('Supprimer cet utilisateur ?');">
-            <button type="submit">Supprimer</button>
-          </form>
-        </td>
-      </tr>
+        <tr>
+            <td>
+                {{ user.email }}
+                {% if 'ROLE_ADMIN' in user.roles %}
+                    <span class="badge-admin">ADMIN</span>
+                {% endif %}
+            </td>
+            <td>{{ user.roles|join(', ') }}</td>
+            <td>
+                <form method="post" action="{{ path('admin_user_delete', {id: user.id}) }}" onsubmit="return confirm('Supprimer cet utilisateur ?');" style="display:inline-block">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete_user_' ~ user.id) }}">
+                    <button type="submit" class="btn-outline">Supprimer</button>
+                </form>
+
+                <form method="post" action="{{ path('admin_user_promote', {id: user.id}) }}" style="display:inline-block" onsubmit="return confirm('Promouvoir cet utilisateur en admin ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('promote_user_' ~ user.id) }}">
+                    <button type="submit" class="btn-outline">Promouvoir</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">Aucun utilisateur trouvé.</td>
+        </tr>
     {% endfor %}
-  </tbody>
+    </tbody>
 </table>
 {% endblock %}

@@ -24,7 +24,7 @@ security:
             form_login:
                 login_path: login       # route affichant le formulaire de login
                 check_path: login       # route traitant les données du formulaire
-                default_target_path: profil_home  # route après connexion réussie
+                default_target_path: app_redirect_after_login  # route après connexion réussie
             logout:
                 path: logout            # route pour déconnexion
 

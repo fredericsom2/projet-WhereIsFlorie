@@ -1,0 +1,27 @@
+{% extends 'guest/base.html.twig' %}
+
+{% block title %}Toutes les expériences de voyage{% endblock %}
+
+{% block body %}
+<div class="alltravels-page">
+    <h1>Expériences de voyage</h1>
+
+    <form method="get" action="{{ path('experience_list') }}">
+        <input type="text" name="search" value="{{ search }}" placeholder="Rechercher une expérience..." />
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <div class="experience-list">
+        {% for experience in experiences %}
+            <div class="experience-card">
+                <h2>{{ experience.titre }}</h2>
+                <p>{{ experience.contenu|slice(0, 200) }}...</p>
+                <small>Publié le {{ experience.createdAt|date('d/m/Y') }}</small>
+            </div>
+        {% else %}
+            <p>Aucune expérience trouvée.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
