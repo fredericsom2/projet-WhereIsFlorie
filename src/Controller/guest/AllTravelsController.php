@@ -18,7 +18,7 @@ class AllTravelsController extends AbstractController
 
         if ($search) {
             $experiences = $repository->createQueryBuilder('e')
-                ->where('e.titre LIKE :search OR e.contenu LIKE :search')
+                ->where('e.title LIKE :search OR e.description LIKE :search')
                 ->setParameter('search', '%' . $search . '%')
                 ->getQuery()
                 ->getResult();
@@ -31,7 +31,16 @@ class AllTravelsController extends AbstractController
             'search' => $search,
         ]);
     }
+
+    #[Route('/experience/{id}', name: 'experience_show')]
+    public function show(Experience $experience): Response
+    {
+        return $this->render('guest/experience_show.html.twig', [
+            'experience' => $experience,
+        ]);
+    }
 }
+
 
 
 

@@ -1,0 +1,21 @@
+{% extends 'guest/base.html.twig' %}
+
+{% block metatitle %}{{ experience.title }}{% endblock %}
+
+{% block body %}
+<div class="experience-detail-page" style="padding-top: 100px;">
+  <h1>{{ experience.title }}</h1>
+
+ {% if experience.image %}
+  <div class="experience-image-wrapper">
+    <img src="{{ asset('uploads/' ~ experience.image) }}" alt="{{ experience.title }}" class="experience-image">
+  </div>
+{% endif %}
+
+  <p>{{ experience.description }}</p>
+
+ 
+
+  <p><a href="{{ path('alltravels') }}">← Retour à toutes les expériences</a></p>
+</div>
+{% endblock %}

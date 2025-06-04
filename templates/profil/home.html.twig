@@ -1,10 +1,15 @@
 {% extends 'guest/base.html.twig' %}
 
 {% block main %}
-
 <section class="product-form-section">
   <div class="form-wrapper">
-    <h1>Créer une experience</h1>
+    <h1>Créer une expérience</h1>
+
+    {% for message in app.flashes('success') %}
+      <div class="flash-success">
+        {{ message|raw }}
+      </div>
+    {% endfor %}
 
     <form method="POST" enctype="multipart/form-data" class="product-form" action="{{ path('profil_home') }}">
       <label>
@@ -27,11 +32,40 @@
         <input type="file" name="image" accept="image/*">
       </label>
 
-      <button type="submit">Créer l'experience</button>
+      <button type="submit">Créer l'expérience</button>
     </form>
   </div>
 </section>
 
+{% if experiences is not empty %}
+  <section class="experience-list-section">
+    <h1>Mes expériences</h1>
+    <div class="experience-grid">
+      {% for exp in experiences %}
+        <div class="experience-card">
+          {% if exp.image %}
+            <img src="{{ asset('uploads/' ~ exp.image) }}" alt="Photo de {{ exp.title }}">
+          {% endif %}
+          <h3>{{ exp.title }}</h3>
+          <p>{{ exp.description }}</p>
+          {% if exp.isPublished %}
+            <span class="badge">Public</span>
+          {% else %}
+            <span class="badge private">Privé</span>
+          {% endif %}
 
-
+          <div class="experience-buttons">
+            <a href="{{ path('experience_edit', {'id': exp.id}) }}" class="edit-button">Modifier</a>
+            <form method="POST" action="{{ path('experience_delete', {'id': exp.id}) }}" style="display:inline;">
+              <input type="hidden" name="_token" value="{{ csrf_token('delete_experience_' ~ exp.id) }}">
+              <button type="submit" class="delete-button" onclick="return confirm('Supprimer cette expérience ?');">
+                Supprimer
+              </button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
 {% endblock %}

@@ -30,20 +30,21 @@ class Experience
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    
 
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+        public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -55,7 +56,6 @@ class Experience
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -67,7 +67,6 @@ class Experience
     public function setImage(string $image): static
     {
         $this->image = $image;
-
         return $this;
     }
 
@@ -79,7 +78,6 @@ class Experience
     public function setIsPublished(bool $isPublished): static
     {
         $this->isPublished = $isPublished;
-
         return $this;
     }
 
@@ -91,7 +89,6 @@ class Experience
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
         return $this;
     }
 }

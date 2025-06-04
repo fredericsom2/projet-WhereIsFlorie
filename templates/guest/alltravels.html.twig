@@ -1,27 +1,32 @@
 {% extends 'guest/base.html.twig' %}
 
-{% block title %}Toutes les expériences de voyage{% endblock %}
+{% block metatitle %}Toutes les expériences de voyage{% endblock %}
 
 {% block body %}
-<div class="alltravels-page">
-    <h1>Expériences de voyage</h1>
+<div class="travel-experiences-page">
+  <h1 class="travel-page-title">Expériences de voyage</h1>
 
-    <form method="get" action="{{ path('experience_list') }}">
-        <input type="text" name="search" value="{{ search }}" placeholder="Rechercher une expérience..." />
-        <button type="submit">Rechercher</button>
-    </form>
+  <form method="get" action="{{ path('alltravels') }}" class="travel-search-form">
+    <input type="text" name="search" value="{{ search }}" placeholder="Rechercher une expérience..." />
+    <button type="submit">Rechercher</button>
+  </form>
 
-    <div class="experience-list">
-        {% for experience in experiences %}
-            <div class="experience-card">
-                <h2>{{ experience.titre }}</h2>
-                <p>{{ experience.contenu|slice(0, 200) }}...</p>
-                <small>Publié le {{ experience.createdAt|date('d/m/Y') }}</small>
-            </div>
-        {% else %}
-            <p>Aucune expérience trouvée.</p>
-        {% endfor %}
-    </div>
+  {% if search %}
+    <p>Résultats pour : <strong>{{ search }}</strong></p>
+  {% endif %}
+
+  <p>{{ experiences|length }} expérience(s) trouvée(s).</p>
+
+  <div class="travel-experience-list">
+    {% for experience in experiences %}
+      <div class="travel-experience-card">
+        <h2>{{ experience.title }}</h2>
+        <p>{{ experience.description|striptags|slice(0, 200) }}...</p>
+        <a href="{{ path('experience_show', { id: experience.id }) }}" class="travel-see-more">Voir plus</a>
+      </div>
+    {% else %}
+      <p>Aucune expérience trouvée.</p>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}
-

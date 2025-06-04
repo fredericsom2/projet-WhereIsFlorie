@@ -1,16 +1,20 @@
 {% extends 'guest/base.html.twig' %}
 
+{% block metatitle %}
+	Utilisateur
+{% endblock metatitle %}
+
 {% block main %}
 <div class="user-wrapper">
   <div class="user-content">
     <h1>Bienvenue {{ user.email }}</h1>
 
     <div class="user-actions">
-      <a href="{{ path('profil_home') }}" class="btn">Créer une nouvelle expérience</a>
+      <a href="{{ path('profil_home') }}" class="btn">Créer une nouvelle expérience ou modifier une publication</a>
       <a href="{{ path('logout') }}" class="btn btn-outline">Se déconnecter</a>
     </div>
 
-    <h2>Vos expériences</h2>
+    <h1>Vos expériences</h1>
 
     {% if experiences is not empty %}
       {% for experience in experiences %}

@@ -95,7 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param list<string> $roles
+     * @param string[] $roles
      */
     public function setRoles(array $roles): static
     {
@@ -193,16 +193,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    // ✅ Méthode ajoutée pour promouvoir en ROLE_ADMIN
+
     public function promoteToAdmin(): static
-    {
-        $roles = $this->getRoles();
+{
+    $roles = $this->getRoles();
 
-        if (!in_array('ROLE_ADMIN', $roles)) {
-            $roles[] = 'ROLE_ADMIN';
-            $this->setRoles($roles);
-        }
-
-        return $this;
+    if (!in_array('ROLE_ADMIN', $roles)) {
+        $roles[] = 'ROLE_ADMIN';
+        $this->setRoles(array_unique($roles));
     }
+
+    return $this;
+}
+
 }

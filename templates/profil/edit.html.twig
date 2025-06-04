@@ -1,0 +1,53 @@
+{% extends 'guest/base.html.twig' %}
+
+{% block metatitle %}
+	Edit
+{% endblock metatitle %}
+
+{% block main %}
+<section class="product-form-section">
+  <div class="form-wrapper">
+    <h1>Modifier l'expérience</h1>
+
+    {% for message in app.flashes('success') %}
+      <div class="flash-success">
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <form method="POST" enctype="multipart/form-data" class="product-form">
+      <label>
+        Titre
+        <input type="text" name="title" value="{{ experience.title }}" required>
+      </label>
+
+      <label>
+        Description
+        <textarea name="description" rows="4" required>{{ experience.description }}</textarea>
+      </label>
+
+      <label class="checkbox-label">
+        <input type="checkbox" name="is-published" {% if experience.isPublished %}checked{% endif %}>
+        Profil public ?
+      </label>
+
+      {% if experience.image %}
+        <div class="current-image">
+          <p>Image actuelle :</p>
+          <img src="{{ asset('uploads/' ~ experience.image) }}" alt="Image actuelle" />
+        </div>
+      {% endif %}
+
+      <label>
+        Changer la photo (optionnel)
+        <input type="file" name="image" accept="image/*">
+      </label>
+
+      <div class="form-buttons">
+        <button type="submit">Enregistrer les modifications</button>
+        <a href="{{ path('profil_home') }}" class="cancel-button">Annuler</a>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
