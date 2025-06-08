@@ -6,15 +6,18 @@
 <section class="destinations-section">
     <h2>Mes Voyages</h2>
 
-    {% for destination in destinations %}
-        <div class="destination">
-            <img src="{{ asset(destination.image) }}" alt="{{ destination.title }}">
-            <div class="destination-text">
-                <h3>{{ destination.title }}</h3>
-                <p>{{ destination.description }}</p>
-            </div>
+ {% for destination in destinations %}
+    <div class="destination">
+       
+        <div class="destination-text">
+            <h3>{{ destination.title }}</h3>
+            <p>{{ destination.description }}</p>
+            <a href="{{ path('destination_' ~ destination.slug) }}">Voir cette destination</a>
+
         </div>
-    {% endfor %}
+    </div>
+{% endfor %}
+
 </section>
 
 {% endblock %}

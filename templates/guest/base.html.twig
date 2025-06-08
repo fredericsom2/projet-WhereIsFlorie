@@ -3,26 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>	{% block metatitle %}{% endblock %}</title>
+    <title>{% block metatitle %}{% endblock %}</title>
+
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
 
-{% include 'guest/partials/_header.html.twig' %}
+    {# --- HEADER --- #}
+    {% include 'guest/partials/_header.html.twig' %}
 
-{% block main %}
-    {% block body %}
-    
+    {# --- MAIN CONTENT --- #}
+    {% block main %}
+        {% block body %}{% endblock %}
     {% endblock %}
-{% endblock main %}
 
+    {# --- FOOTER --- #}
+    {% include 'guest/partials/_footer.html.twig' %}
 
+    {# --- JS SCRIPTS --- #}
+    {% block script %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.getElementById('hamburger');
+            const menu = document.querySelector('.menu');
 
-{% block script %}
-{% endblock script %}
+            if (hamburger && menu) {
+                hamburger.addEventListener('click', function () {
+                    menu.classList.toggle('show');
+                });
 
-{% include 'guest/partials/_footer.html.twig' %}
+                // Fermer le menu après avoir cliqué sur un lien (UX mobile)
+                const menuLinks = menu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.classList.remove('show');
+                    });
+                });
+            }
+        });
+    </script>
+    {% endblock %}
 
 </body>
 </html>

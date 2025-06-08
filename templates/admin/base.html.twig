@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>	{% block metatitle %}{% endblock %}</title>
+</head>
+<link rel="stylesheet" href="{{ asset('asset/css/style.css') }}" type="text/css" />
+<body>
+
+<header>
+
+	
+
+	<nav>
+
+		<ul>
+			
+			<li><a href="{{path('admin-create-user')}}">Créer un admin</a></li>
+			<li><a href="{{path('admin-list-admins')}}">Voir les admins</a></li>
+			<li><a href="{{ path('logout')}}">Se déconnecter</a></li>
+		</ul>
+
+	</nav>
+
+	
+
+
+
+	
+
+</header>
+
+{% for message in app.flashes('error') %}
+
+	<div style="background-color: red;">
+		<p>{{ message }} </p>
+	</div>
+
+{% endfor %}
+
+{% for message in app.flashes('success') %}
+
+	<div style="background-color: green;">
+		<p>{{ message }} </p>
+	</div>
+
+	
+{% endfor %}
+
+
+		<p> connecté en tant que {{ app.user.email}} </p>
+
+<main>
+	
+
+	{% block main %}
+	{% endblock %}
+
+</main>
+
+</body>
+</html>

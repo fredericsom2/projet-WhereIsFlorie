@@ -17,10 +17,22 @@ class DestinationController extends AbstractController
         return $this->render('guest/destinations/martinique.html.twig');
     }
 
-    #[Route('/destinations/ile-maurice', name: 'destination_ile_maurice')]
+    #[Route('/destinations/maurice', name: 'destination_maurice')]
     public function ileMaurice(): Response
     {
-        return $this->render('guest/destinations/ile-maurice.html.twig');
+        return $this->render('guest/destinations/maurice.html.twig');
+    }
+
+    #[Route('/destinations/rome', name: 'destination_rome')]
+    public function rome(): Response
+    {
+        return $this->render('guest/destinations/rome.html.twig');
+    }
+
+    #[Route('/destinations/faro', name: 'destination_faro')]
+    public function faro(): Response
+    {
+        return $this->render('guest/destinations/faro.html.twig');
     }
 
     #[Route('/destinations/tokyo', name: 'destination_tokyo')]
@@ -29,5 +41,12 @@ class DestinationController extends AbstractController
         return $this->render('guest/destinations/tokyo.html.twig');
     }
 
-    // Ajoute les 3 autres de la même façon
+    #[Route('/destinations/fuerteventura', name: 'destination_fuerteventura')]
+    public function fuerteventura(): Response
+    {
+        return $this->render('guest/destinations/fuerteventura.html.twig');
+    }
+
+
+    
 }
