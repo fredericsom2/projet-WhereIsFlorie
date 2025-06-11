@@ -1,36 +1,49 @@
+{# Hérite du template de base spécifique aux invités (guest), avec navbar, styles, etc. #}
 {% extends 'guest/base.html.twig' %}
 
+{# Bloc pour définir le titre dans les balises <title> de la page #}
 {% block metatitle %}
     WhereIsFlorie | Créer un compte
 {% endblock metatitle %}
 
+{# Bloc principal de contenu (correspond à un bloc "main" dans le layout) #}
 {% block main %}
 <div class="login-hero">
   <div class="login-form-container">
+  
+    {# Titre principal de la page d'inscription #}
     <h1>Créer un compte sur WhereIsFlorie</h1>
 
+    {# Formulaire HTML, envoi via POST vers la route 'register' #}
     <form class="login-form" method="POST" action="{{ path('register') }}">
+      
+      {# Champ pour l'email, prérempli avec la variable existing_email si elle est définie #}
       <label for="email">Email</label>
       <input type="email" id="email" name="email" value="{{ existing_email ?? '' }}" required>
 
+      {# Champ pour le mot de passe #}
       <label for="password">Mot de passe</label>
       <input type="password" id="password" name="password" required>
 
+      {# Bouton de soumission du formulaire #}
       <button type="submit">Créer un compte</button>
     </form>
 
+    {# Affiche les messages de succès (flash) #}
     {% for message in app.flashes('success') %}
       <div class="flash-success">
         {{ message }}
       </div>
     {% endfor %}
 
+    {# Affiche les messages d'erreur (flash) #}
     {% for message in app.flashes('error') %}
       <div class="flash-error">
         {{ message }}
       </div>
     {% endfor %}
 
+    {# Si une erreur de compte existant est détectée, on réaffiche l’email et propose de se connecter #}
     {% if existing_email is defined %}
       <div class="already-registered">
         <p>Un compte avec l'email <strong>{{ existing_email }}</strong> existe déjà.</p>
@@ -39,6 +52,8 @@
         </a>
       </div>
     {% endif %}
+    
   </div>
 </div>
 {% endblock main %}
+
